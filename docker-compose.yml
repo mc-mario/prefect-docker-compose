@@ -46,7 +46,7 @@ services:
   agent:
     image: prefecthq/prefect:2.19-python3.12
     restart: always
-    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "agent", "start", "-q", "LOL - TFM"]
+    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "agent", "start", "-q", "${QUEUE_NAME}"]
     environment:
       - PREFECT_API_URL=http://server:4200/api
 
