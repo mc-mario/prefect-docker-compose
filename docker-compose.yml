@@ -26,7 +26,7 @@ services:
 
   ### Prefect Server API and UI
   server:
-    image: prefecthq/prefect:2.11.5-python3.11
+    image: prefecthq/prefect:latest
     restart: always
     volumes:
       - prefect:/root/.prefect
@@ -44,7 +44,7 @@ services:
 
   ## Prefect Agent
   agent:
-    image: prefecthq/prefect:2.11.5-python3.11
+    image: prefecthq/prefect:latest
     restart: always
     entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "agent", "start", "-q", "LOL - TFM"]
     environment:
