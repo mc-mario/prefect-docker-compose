@@ -33,7 +33,7 @@ services:
     entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
     environment:
       - PREFECT_UI_URL=${PREFECT_SERVER_URL}
-      - PREFECT_API_URL=${PREFECT_SERVER_URL}
+      - PREFECT_API_URL=${PREFECT_SERVER_URL}/api
       - PREFECT_SERVER_API_HOST=0.0.0.0
       - PREFECT_API_DATABASE_CONNECTION_URL=postgresql+asyncpg://postgres:postgres@database:5432/prefect
 
