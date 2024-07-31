@@ -30,6 +30,7 @@ services:
     restart: always
     volumes:
       - prefect:/root/.prefect
+      - ${LOCALFS}:/opt/prefect/flows
     entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "server", "start"]
     environment:
       - PREFECT_UI_URL=${PREFECT_SERVER_URL}
@@ -46,7 +47,9 @@ services:
   agent:
     image: prefecthq/prefect:2.19-python3.12
     restart: always
-    entrypoint: ["/opt/prefect/entrypoint.sh", "prefect", "agent", "start", "--pool", "${POOL_NAME}", "--work-queue", "${WORK_QUEUE}"]
+    entrypoint: sh -c 'pip install -r /opt/prefect/flows/requirements.txt && /opt/prefect/entrypoint.sh prefect agent start --pool "${POOL_NAME}" --work-queue "${WORK_QUEUE}"'
+    volumes:
+      - ${LOCALFS}:/opt/prefect/flows
     environment:
       - PREFECT_API_URL=http://server:4200/api
 
